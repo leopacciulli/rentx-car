@@ -3,6 +3,7 @@ import { StatusBar } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 import Logo from '../../assets/logo.svg';
+import Car from '../../components/Car';
 
 import { 
   Container,
@@ -12,6 +13,16 @@ import {
 } from './styles';
 
 const Home = () => {
+  const carData = {
+    brand: 'Audi',
+    name: 'RS 5 Coupe',
+    rent: {
+      period: 'Ao dia',
+      price: 120
+    },
+    thumbnail: 'https://w7.pngwing.com/pngs/833/338/png-transparent-audi-rs5-car-audi-q5-audi-s5-audi-convertible-car-performance-car.png'
+  }
+
   return (
     <Container>
       <StatusBar 
@@ -32,6 +43,10 @@ const Home = () => {
           </TotalCars>
         </HeaderContent>
       </Header>
+
+      <Car data={carData} />
+      <Car data={carData} />
+      <Car data={carData} />
     </Container>
   )
 }
