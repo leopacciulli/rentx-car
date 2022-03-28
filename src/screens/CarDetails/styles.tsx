@@ -12,8 +12,8 @@ export const Header = styled.View`
   align-items: center;
 
   position: absolute;
-  margin-top: 24px;
-  margin-left: 24px;
+  margin-top: 16px;
+  margin-left: 16px;
 `
 
 export const CarImages = styled.View`

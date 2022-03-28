@@ -36,8 +36,8 @@ const Home = () => {
     getCars()
   }, [])
 
-  const handleCarDetails = () => {
-    navigation.navigate('CarDetails')
+  const handleCarDetails = (car: CarDTO) => {
+    navigation.navigate('CarDetails', { car })
   }
 
   return (
@@ -67,7 +67,7 @@ const Home = () => {
           data={cars}
           keyExtractor={item => String(item.id)}
           renderItem={({ item }) => 
-            <Car data={item} onPress={handleCarDetails} />
+            <Car data={item} onPress={() => handleCarDetails(item)} />
           }
         />
       }
