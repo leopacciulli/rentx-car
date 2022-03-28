@@ -3,6 +3,8 @@ import { SafeAreaView } from 'react-native';
 import Acessory from '../../components/Acessory';
 import BackButton from '../../components/BackButton';
 import ImageSlider from '../../components/ImageSlider';
+import Button from '../../components/Button';
+import { useNavigation } from '@react-navigation/native';
 
 import speedSvg from '../../assets/speed.svg';
 import accelerationSvg from '../../assets/acceleration.svg';
@@ -27,22 +29,27 @@ import {
   Acessories,
   Footer,
 } from './styles';
-import Button from '../../components/Button';
 
 interface CarDetailsProps {
 
 }
 
 const CarDetails = ({}: CarDetailsProps) => {
+  const navigation = useNavigation();
+
+  const handleConfirmRental = () => {
+    navigation.navigate('Scheduling')
+  }
+
   return (
     <SafeAreaView>
       <Container>
         <Header>
-          <BackButton onPress={() => {}} /> 
+          <BackButton onPress={navigation.goBack} /> 
         </Header>
 
         <CarImages>
-          <ImageSlider imagesUrl={['https://w7.pngwing.com/pngs/833/338/png-transparent-audi-rs5-car-audi-q5-audi-s5-audi-convertible-car-performance-car.png']} /> 
+          <ImageSlider imagesUrl={['https://wikiimg.tojsiabtv.com/wikipedia/commons/thumb/7/7d/2018_Audi_S5_TFSi_Quattro_Automatic_3.0_Front.jpg/1200px-2018_Audi_S5_TFSi_Quattro_Automatic_3.0_Front.jpg']} /> 
         </CarImages>
 
         <Content>
@@ -74,8 +81,8 @@ const CarDetails = ({}: CarDetailsProps) => {
 
         <Footer>
           <Button
-            title='Confirmar'
-            onPress={() => {}}
+            title='Escolher período do alguel'
+            onPress={handleConfirmRental}
           />
         </Footer>
       </Container>

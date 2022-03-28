@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import Acessory from '../../components/Acessory';
@@ -45,6 +46,11 @@ interface SchedulingDetailsProps { }
 
 const SchedulingDetails = ({}: SchedulingDetailsProps) => {
   const theme = useTheme();
+  const navigation = useNavigation();
+
+  const handleConfirmRental = () => {
+    navigation.navigate('SchedulingComplete')
+  }
 
   return (
     <SafeAreaView>
@@ -116,8 +122,9 @@ const SchedulingDetails = ({}: SchedulingDetailsProps) => {
 
         <Footer>
           <Button
-            title='Confirmar'
-            onPress={() => {}}
+            title='Alugar agora'
+            color={theme.colors.success}
+            onPress={handleConfirmRental}
           />
         </Footer>
       </Container>

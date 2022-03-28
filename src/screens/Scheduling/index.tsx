@@ -18,11 +18,17 @@ import {
   Content,
   Footer,
 } from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 interface SchedulingProps { }
 
 const Scheduling = ({}: SchedulingProps) => {
   const theme = useTheme();
+  const navigation = useNavigation();
+
+  const handleConfirmRental = () => {
+    navigation.navigate('SchedulingDetails')
+  }
 
   return (
     <Container>
@@ -64,7 +70,7 @@ const Scheduling = ({}: SchedulingProps) => {
       <Footer>
         <Button
           title="Confirmar"
-          onPress={() => {}}
+          onPress={handleConfirmRental}
         />
       </Footer>
     </Container>
