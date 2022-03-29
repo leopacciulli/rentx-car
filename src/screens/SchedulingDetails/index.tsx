@@ -52,6 +52,7 @@ interface RentalPeriod {
 
 const SchedulingDetails = () => {
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod)
+  const [loading, setLoading] = useState(false)
 
   const theme = useTheme();
   const navigation = useNavigation();
@@ -68,18 +69,28 @@ const SchedulingDetails = () => {
   }, [])
 
   const handleConfirmRental = async () => {
-    const schedulesByCar = await api.get(`/schedules/${car.id}`)
+    setLoading(true)
+
+    const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`)
 
     const unavailable_dates = [
       ...schedulesByCar.data.unavailable_dates,
       ...dates
     ]
 
-    await api.put(`/schedules/${car.id}`, {
+    await api.post(`schedules_byuser`, {
+      car,
+      user_id: 1,
+      startDate: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyyy'),
+      endDate: format(getPlatformDate(new Date(dates[dates.length - 1])), 'dd/MM/yyyy'),
+    })
+
+    await api.put(`/schedules_bycars/${car.id}`, {
       id: car.id,
       unavailable_dates
     })
 
+    setLoading(false)
     navigation.navigate('SchedulingComplete')
   }
 
@@ -157,6 +168,7 @@ const SchedulingDetails = () => {
             title='Alugar agora'
             color={theme.colors.success}
             onPress={handleConfirmRental}
+            loading={loading}
           />
         </Footer>
       </Container>
